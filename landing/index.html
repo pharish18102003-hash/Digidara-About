@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>DigiDARA One — One Platform. Every Business. Powered by AI.</title>
+  <meta name="description" content="DigiDARA One is the complete enterprise SaaS platform — CRM, Finance, Inventory, HRMS, Marketing, and AI Copilot in a single unified suite."/>
+  <meta property="og:title" content="DigiDARA One — One Platform. Every Business. Powered by AI."/>
+  <meta property="og:description" content="The enterprise SaaS platform comparable to Salesforce, Zoho One, and HubSpot."/>
+  <meta property="og:type" content="website"/>
+  <meta name="theme-color" content="#ffffff"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+<style>
+/* ══════════════════════════════════════════════
+   RESET & TOKENS
+══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;
+  --bg2:#f8f8fc;
+  --text:#0a0a14;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --accent:#5b5bd6;
+  --accent2:#7c3aed;
+  --accent3:#ec4899;
+  --dark:#08080f;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --radius:20px;
+  --shadow:0 4px 24px rgba(0,0,0,0.06);
+  --shadow-lg:0 20px 60px rgba(0,0,0,0.12);
+}
+html{font-family:var(--font);background:var(--dark);color:var(--text);scroll-behavior:auto;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--dark)}
+
+/* ══════════════════════════════════════════════
+   SCROLL PROGRESS
+══════════════════════════════════════════════ */
+#scroll-progress{
+  position:fixed;top:0;left:0;right:0;height:2px;z-index:999;
+  background:linear-gradient(90deg,#5b5bd6,#7c3aed,#ec4899);
+  transform-origin:left;transform:scaleX(0);
+  will-change:transform;
+}
+
+/* ══════════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:0 48px;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background 0.5s ease,border-color 0.5s ease,box-shadow 0.5s ease;
+}
+#nav.light-nav{
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 1px 16px rgba(0,0,0,0.06);
+}
+#nav.dark-nav{
+  background:rgba(8,8,15,0.75);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;transition:opacity 0.2s}
+.logo:hover{opacity:0.85}
+.logo-mark{
+  width:34px;height:34px;border-radius:9px;flex-shrink:0;
+  background:linear-gradient(135deg,#5b5bd6,#7c3aed);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:15px;color:#fff;
+  position:relative;overflow:hidden;
+}
+.logo-mark::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,0.25)0%,transparent 55%);
+}
+.logo-text{font-size:16px;font-weight:800;letter-spacing:-0.04em}
+.logo-text .one{color:#5b5bd6}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;text-decoration:none;transition:opacity 0.2s}
+#nav.light-nav .nav-links a{color:var(--muted)}
+#nav.light-nav .nav-links a:hover{color:var(--text)}
+#nav.dark-nav .nav-links a{color:rgba(255,255,255,0.5)}
+#nav.dark-nav .nav-links a:hover{color:#fff}
+.nav-cta{display:flex;gap:10px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:10px 22px;border-radius:12px;font-size:14px;font-weight:600;
+  font-family:var(--font);cursor:pointer;border:none;text-decoration:none;
+  transition:all 0.2s ease;white-space:nowrap;
+}
+.btn-outline-dark{background:transparent;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.15)}
+.btn-outline-dark:hover{color:#fff;border-color:rgba(255,255,255,0.4)}
+.btn-outline-light{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-outline-light:hover{color:var(--text);border-color:#ccc}
+.btn-primary{
+  background:linear-gradient(135deg,#5b5bd6,#7c3aed);color:#fff;
+  box-shadow:0 6px 24px rgba(91,91,214,0.35);
+}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 32px rgba(91,91,214,0.45)}
+.btn-lg{padding:16px 36px;font-size:16px;border-radius:14px}
+.btn-xl{padding:20px 48px;font-size:17px;border-radius:16px}
+
+/* ══════════════════════════════════════════════
+   CINEMATIC HERO (scroll driver — 700vh tall)
+══════════════════════════════════════════════ */
+#hero-driver{height:700vh;position:relative}
+#hero-sticky{
+  position:sticky;top:0;height:100vh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Canvas fills the hero sticky container */
+#film{
+  position:absolute;inset:0;width:100%;height:100%;
+  display:block;will-change:contents;
+}
+
+/* Cinematic letterbox — slides in after scene 1 */
+.letterbox{
+  position:absolute;left:0;right:0;z-index:8;
+  background:#000;pointer-events:none;
+  transition:height 0.9s cubic-bezier(0.4,0,0.2,1);
+}
+#lb-top{top:0;height:0}
+#lb-bot{bottom:0;height:0}
+
+/* Vignette */
+#vig{
+  position:absolute;inset:0;z-index:6;pointer-events:none;
+  background:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 35%,rgba(0,0,0,0.7)100%);
+}
+
+/* Film grain */
+#grain{
+  position:absolute;inset:0;z-index:7;pointer-events:none;
+  opacity:0.04;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;animation:grain 0.12s steps(1) infinite;
+}
+@keyframes grain{
+  0%{background-position:0 0}10%{background-position:-5% -10%}20%{background-position:-15% 5%}
+  30%{background-position:7% -25%}40%{background-position:-5% 25%}50%{background-position:-15% 10%}
+  60%{background-position:15% 0}70%{background-position:0 15%}80%{background-position:3% 35%}
+  90%{background-position:-10% 10%}100%{background-position:9% 40%}
+}
+
+/* Hero text layers */
+#hero-layer{
+  position:absolute;z-index:20;width:100%;text-align:center;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  will-change:opacity,transform;
+  pointer-events:none;
+  padding:0 24px;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 18px;border-radius:100px;
+  font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.07);
+  color:rgba(255,255,255,0.75);
+  margin-bottom:28px;
+  backdrop-filter:blur(10px);
+}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:#5b5bd6}
+#hero-h1{
+  font-size:clamp(44px,8.5vw,106px);
+  font-weight:900;letter-spacing:-0.055em;line-height:0.96;
+  color:#fff;margin-bottom:24px;
+}
+.grad-word{
+  background:linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899,#f43f5e);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:200% 200%;animation:gradShift 4s ease-in-out infinite;
+}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+#hero-sub{
+  font-size:clamp(16px,2vw,22px);color:rgba(255,255,255,0.45);
+  font-weight:400;line-height:1.65;max-width:560px;margin:0 auto 48px;
+}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;pointer-events:all}
+
+/* Scene caption */
+#scene-cap{
+  position:absolute;z-index:20;bottom:110px;left:50%;transform:translateX(-50%);
+  font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);pointer-events:none;
+  transition:opacity 0.5s;
+  white-space:nowrap;
+}
+
+/* Scroll cue */
+#scroll-cue{
+  position:absolute;z-index:20;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  color:rgba(255,255,255,0.3);pointer-events:none;
+  animation:floatUp 2.5s ease-in-out infinite;
+  will-change:transform,opacity;
+}
+@keyframes floatUp{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
+.cue-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(255,255,255,0.3),transparent)}
+.cue-text{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase}
+
+/* ══════════════════════════════════════════════
+   PARALLAX FLOATING CARDS (inside hero)
+══════════════════════════════════════════════ */
+.float-card{
+  position:absolute;z-index:15;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:18px;padding:18px 22px;
+  pointer-events:none;opacity:0;
+  will-change:transform,opacity;
+  min-width:160px;
+}
+.fc-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:0.05em;margin-bottom:6px}
+.fc-value{font-size:26px;font-weight:800;letter-spacing:-0.04em;color:#fff}
+.fc-sub{font-size:11px;margin-top:4px}
+.fc-green{color:#34d399}.fc-violet{color:#a78bfa}.fc-amber{color:#fbbf24}.fc-rose{color:#fb7185}
+
+/* ══════════════════════════════════════════════
+   SECTION BASE (below the hero)
+══════════════════════════════════════════════ */
+.light-zone{background:var(--bg)}
+section{padding:140px 0;position:relative}
+section.alt{background:var(--bg2)}
+.container{max-width:1160px;margin:0 auto;padding:0 48px}
+.section-label{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:#5b5bd6;margin-bottom:20px;
+}
+.section-label::before{content:'';width:16px;height:2px;background:#5b5bd6;border-radius:2px}
+h2.section-title{
+  font-size:clamp(34px,5vw,60px);font-weight:900;
+  letter-spacing:-0.045em;line-height:1.08;color:var(--text);
+  margin-bottom:20px;
+}
+.section-desc{font-size:18px;color:var(--muted);line-height:1.7;max-width:560px;font-weight:400}
+.grad-text{
+  background:linear-gradient(135deg,#5b5bd6,#7c3aed,#ec4899);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ══════════════════════════════════════════════
+   FEATURES GRID
+══════════════════════════════════════════════ */
+.feat-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border-radius:24px;overflow:hidden;margin-top:64px;
+  box-shadow:var(--shadow-lg);
+}
+.feat-item{
+  background:var(--bg);padding:40px;
+  transition:background 0.3s;
+}
+.feat-item:hover{background:#f5f5ff}
+.feat-ico{font-size:30px;margin-bottom:20px}
+.feat-name{font-size:17px;font-weight:700;color:var(--text);margin-bottom:10px}
+.feat-text{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* ══════════════════════════════════════════════
+   MODULE SHOWCASE ROWS
+══════════════════════════════════════════════ */
+.mod-row{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.mod-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  padding:5px 14px;border-radius:8px;margin-bottom:20px;
+}
+.mod-row h2{font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-0.04em;line-height:1.1;color:var(--text);margin-bottom:18px}
+.mod-row p{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:32px}
+.mod-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+.mod-stat{padding:20px;background:var(--bg2);border-radius:16px;border:1px solid var(--border)}
+.mod-stat-n{font-size:30px;font-weight:900;letter-spacing:-0.04em}
+.mod-stat-l{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* Mock dashboard widget */
+.dash-widget{
+  background:#fff;border-radius:24px;border:1px solid var(--border);
+  box-shadow:var(--shadow-lg);overflow:hidden;
+  will-change:transform;
+}
+.dw-bar{
+  display:flex;align-items:center;gap:7px;padding:14px 18px;
+  border-bottom:1px solid var(--border);background:#fafafa;
+}
+.dw-dot{width:10px;height:10px;border-radius:50%}
+.dw-red{background:#ff5f57}.dw-yel{background:#febc2e}.dw-grn{background:#28c840}
+.dw-title{font-size:12px;font-weight:600;color:var(--muted);margin-left:6px}
+.dw-body{padding:20px}
+.dw-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:var(--bg2);border-radius:12px;padding:14px;border:1px solid var(--border)}
+.kpi-v{font-size:18px;font-weight:800;letter-spacing:-0.03em;color:var(--text)}
+.kpi-l{font-size:10px;color:var(--muted);margin-top:3px}
+/* inline SVG chart */
+.dw-chart{height:100px;border-radius:12px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);position:relative}
+
+/* Kanban */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.k-col{background:var(--bg2);border-radius:12px;padding:12px;border:1px solid var(--border)}
+.k-head{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:8px}
+.k-card{background:#fff;border-radius:8px;padding:10px;margin-bottom:6px;border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.k-name{font-size:12px;font-weight:600;color:var(--text)}
+.k-val{font-size:11px;color:var(--muted);margin-top:3px}
+
+/* ══════════════════════════════════════════════
+   AI CHAT MOCKUP
+══════════════════════════════════════════════ */
+.chat-win{
+  background:#fff;border-radius:24px;
+  border:1px solid var(--border);box-shadow:var(--shadow-lg);overflow:hidden;
+  max-width:480px;
+}
+.chat-head{
+  padding:16px 20px;border-bottom:1px solid var(--border);background:#fafafa;
+  display:flex;align-items:center;gap:12px;
+}
+.chat-av{
+  width:38px;height:38px;border-radius:11px;flex-shrink:0;
+  background:linear-gradient(135deg,#5b5bd6,#7c3aed);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;color:#fff;font-size:16px;
+  position:relative;overflow:hidden;
+}
+.chat-av::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.2)0%,transparent 55%)}
+.chat-online{font-size:10px;font-weight:700;color:#10b981}
+.chat-body{padding:20px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:82%;padding:11px 15px;border-radius:16px;font-size:14px;line-height:1.55}
+.msg.ai{
+  background:linear-gradient(135deg,#f5f3ff,#ede9fe);
+  border:1px solid #ddd6fe;border-radius:4px 16px 16px 16px;color:var(--text);
+}
+.msg.user{
+  background:linear-gradient(135deg,#5b5bd6,#7c3aed);
+  color:#fff;align-self:flex-end;border-radius:16px 4px 16px 16px;
+}
+.typing-indicator{display:flex;gap:5px;align-items:center;padding:11px 15px;
+  background:linear-gradient(135deg,#f5f3ff,#ede9fe);border:1px solid #ddd6fe;
+  border-radius:4px 16px 16px 16px;width:fit-content;}
+.td{width:7px;height:7px;border-radius:50%;background:#5b5bd6;
+  animation:tdBounce 1.4s infinite}
+.td:nth-child(2){animation-delay:.2s}.td:nth-child(3){animation-delay:.4s}
+@keyframes tdBounce{0%,80%,100%{transform:scale(0.75);opacity:.5}40%{transform:scale(1.1);opacity:1}}
+
+/* ══════════════════════════════════════════════
+   STATS STRIP
+══════════════════════════════════════════════ */
+.stats-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.stat-cell{
+  padding:56px 40px;text-align:center;
+  border-right:1px solid var(--border);
+}
+.stat-cell:last-child{border-right:none}
+.stat-n{font-size:clamp(40px,5vw,64px);font-weight:900;letter-spacing:-0.05em;color:var(--text)}
+.stat-l{font-size:15px;color:var(--muted);margin-top:6px}
+
+/* ══════════════════════════════════════════════
+   INTEGRATIONS GRID
+══════════════════════════════════════════════ */
+.int-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:60px;
+}
+.int-badge{
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  padding:22px 16px;display:flex;flex-direction:column;
+  align-items:center;gap:9px;text-align:center;
+  transition:all 0.25s;box-shadow:var(--shadow);
+}
+.int-badge:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#c4b5fd}
+.int-ico{font-size:28px}
+.int-name{font-size:12px;font-weight:600;color:var(--muted)}
+
+/* ══════════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════════ */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+.testi-card{
+  background:#fff;border:1px solid var(--border);border-radius:22px;
+  padding:32px;box-shadow:var(--shadow);transition:all 0.3s;
+}
+.testi-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.stars{display:flex;gap:3px;margin-bottom:16px}
+.star{font-size:15px;color:#f59e0b}
+.testi-q{font-size:15px;line-height:1.7;color:#374151;margin-bottom:22px;font-style:italic}
+.testi-who{display:flex;align-items:center;gap:12px}
+.testi-av{
+  width:42px;height:42px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:14px;color:#fff;
+  background:linear-gradient(135deg,#5b5bd6,#7c3aed);
+}
+.testi-name{font-size:14px;font-weight:700;color:var(--text)}
+.testi-role{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* ══════════════════════════════════════════════
+   PRICING
+══════════════════════════════════════════════ */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+.price-card{
+  border:1.5px solid var(--border);border-radius:24px;
+  padding:40px;background:#fff;box-shadow:var(--shadow);
+  transition:all 0.3s;position:relative;
+}
+.price-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.price-card.featured{
+  border-color:#5b5bd6;
+  background:linear-gradient(180deg,#f5f3ff 0%,#fff 50%);
+}
+.price-card.featured::before{
+  content:'Most Popular';position:absolute;top:-13px;left:50%;
+  transform:translateX(-50%);
+  background:linear-gradient(135deg,#5b5bd6,#7c3aed);
+  color:#fff;font-size:11px;font-weight:700;
+  padding:4px 18px;border-radius:100px;white-space:nowrap;
+}
+.price-tier{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.price-amt{font-size:50px;font-weight:900;letter-spacing:-0.05em;color:var(--text)}
+.price-amt span{font-size:17px;color:var(--muted);font-weight:400}
+.price-tagline{font-size:14px;color:var(--muted);margin:12px 0 28px;line-height:1.55}
+.price-ul{list-style:none;margin-bottom:36px}
+.price-ul li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--text);padding:9px 0;border-bottom:1px solid var(--border)}
+.price-ul li:last-child{border-bottom:none}
+.price-ul li::before{content:'✦';color:#5b5bd6;font-size:9px;flex-shrink:0}
+
+/* ══════════════════════════════════════════════
+   FAQ
+══════════════════════════════════════════════ */
+.faq-wrap{max-width:780px;margin:56px auto 0}
+.faq-item{border:1.5px solid var(--border);border-radius:16px;margin-bottom:10px;overflow:hidden;background:#fff;box-shadow:var(--shadow);transition:border-color 0.25s}
+.faq-item.open{border-color:#5b5bd6}
+.faq-btn{
+  width:100%;background:none;border:none;font-family:var(--font);
+  font-size:16px;font-weight:600;color:var(--text);
+  padding:22px 28px;text-align:left;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+.faq-icon{font-size:20px;color:var(--muted);transition:transform 0.28s,color 0.28s;flex-shrink:0}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:#5b5bd6}
+.faq-ans{max-height:0;overflow:hidden;transition:max-height 0.38s ease,padding 0.38s;font-size:15px;color:var(--muted);line-height:1.72}
+.faq-item.open .faq-ans{max-height:320px;padding:0 28px 24px}
+
+/* ══════════════════════════════════════════════
+   CONTACT FORM
+══════════════════════════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-form{background:#fff;border:1.5px solid var(--border);border-radius:24px;padding:40px;box-shadow:var(--shadow-lg)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+label{font-size:13px;font-weight:600;color:var(--text)}
+input,select,textarea{
+  padding:12px 16px;border:1.5px solid var(--border);border-radius:12px;
+  font-family:var(--font);font-size:14px;color:var(--text);
+  background:#fafafa;transition:border-color 0.2s,box-shadow 0.2s;outline:none;
+}
+input:focus,select:focus,textarea:focus{border-color:#5b5bd6;box-shadow:0 0 0 3px rgba(91,91,214,0.12);background:#fff}
+textarea{resize:vertical;min-height:120px}
+.contact-info h3{font-size:26px;font-weight:800;color:var(--text);letter-spacing:-0.03em;margin-bottom:16px}
+.contact-info p{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:32px}
+.contact-card{
+  display:flex;align-items:center;gap:14px;
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  padding:18px 20px;margin-bottom:12px;box-shadow:var(--shadow);
+}
+.contact-ico{font-size:22px;width:46px;height:46px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#f0f0ff,#ede9fe);flex-shrink:0;}
+.contact-card-title{font-size:13px;font-weight:700;color:var(--text)}
+.contact-card-sub{font-size:13px;color:var(--muted);margin-top:2px}
+
+/* ══════════════════════════════════════════════
+   CTA SECTION
+══════════════════════════════════════════════ */
+#cta-section{
+  padding:180px 0;text-align:center;background:var(--dark);position:relative;overflow:hidden;
+}
+.cta-aurora{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%,rgba(91,91,214,0.12)0%,transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 50%,rgba(236,72,153,0.08)0%,transparent 60%),
+    radial-gradient(ellipse 60% 80% at 50% 50%,rgba(124,58,237,0.06)0%,transparent 70%);
+}
+.cta-title{font-size:clamp(48px,8vw,92px);font-weight:900;letter-spacing:-0.055em;line-height:0.97;color:#fff;margin-bottom:28px}
+.cta-sub{font-size:19px;color:rgba(255,255,255,0.4);margin-bottom:52px;max-width:480px;margin-inline:auto;line-height:1.65}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cta-note{margin-top:22px;font-size:13px;color:rgba(255,255,255,0.22)}
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+footer{background:#08080f;border-top:1px solid rgba(255,255,255,0.06);padding:64px 0 40px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:60px}
+.foot-brand p{color:rgba(255,255,255,0.35);font-size:14px;line-height:1.7;max-width:240px;margin:14px 0 22px}
+.socials{display:flex;gap:10px}
+.soc{
+  width:38px;height:38px;border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:rgba(255,255,255,0.4);text-decoration:none;
+  transition:all 0.2s;
+}
+.soc:hover{border-color:#5b5bd6;color:#5b5bd6}
+.foot-col h4{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:18px}
+.foot-col a{display:block;color:rgba(255,255,255,0.4);text-decoration:none;font-size:14px;margin-bottom:10px;transition:color 0.2s}
+.foot-col a:hover{color:#fff}
+.foot-bottom{display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);padding-top:28px;font-size:13px;color:rgba(255,255,255,0.22)}
+
+/* ══════════════════════════════════════════════
+   SCROLL REVEAL UTILITY
+══════════════════════════════════════════════ */
+.sr{
+  opacity:0;transform:translateY(36px);
+  transition:opacity 0.75s cubic-bezier(0.4,0,0.2,1),transform 0.75s cubic-bezier(0.4,0,0.2,1);
+}
+.sr.visible{opacity:1;transform:translateY(0)}
+.sr-delay-1{transition-delay:0.1s}
+.sr-delay-2{transition-delay:0.2s}
+.sr-delay-3{transition-delay:0.3s}
+.sr-delay-4{transition-delay:0.4s}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media(max-width:1024px){
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .mod-row{grid-template-columns:1fr;gap:48px}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .price-grid{grid-template-columns:1fr;max-width:440px;margin-inline:auto}
+  .contact-grid{grid-template-columns:1fr;gap:48px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+  .int-grid{grid-template-columns:repeat(4,1fr)}
+  #nav .nav-links{display:none}
+  .stats-strip{grid-template-columns:repeat(2,1fr)}
+  .stat-cell{border-bottom:1px solid var(--border)}
+  .kanban{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  section{padding:80px 0}
+  .container{padding:0 22px}
+  .feat-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .foot-bottom{flex-direction:column;gap:10px;text-align:center}
+  .int-grid{grid-template-columns:repeat(3,1fr)}
+  .dw-kpis{grid-template-columns:1fr 1fr}
+  .kanban{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ────────── SCROLL PROGRESS ────────── -->
+<div id="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
+
+<!-- ────────── NAVIGATION ────────── -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <a href="#" class="logo" aria-label="DigiDARA One Home">
+    <div class="logo-mark" aria-hidden="true">D</div>
+    <span class="logo-text">DigiDARA <span class="one">One</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features-sec">Features</a></li>
+    <li><a href="#crm-sec">CRM</a></li>
+    <li><a href="#pricing-sec">Pricing</a></li>
+    <li><a href="#stories-sec">Stories</a></li>
+    <li><a href="#contact-sec">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#" class="btn btn-outline-dark" id="nav-signin">Sign In</a>
+    <a href="#cta-section" class="btn btn-primary">Get Started →</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     CINEMATIC HERO — 700vh scroll driver
+══════════════════════════════════════════════ -->
+<div id="hero-driver" aria-label="Cinematic hero animation sequence">
+  <div id="hero-sticky" role="img" aria-label="Scroll-driven particle animation telling the DigiDARA One story">
+
+    <!-- Film canvas -->
+    <canvas id="film" aria-hidden="true"></canvas>
+
+    <!-- Cinematic effects -->
+    <div id="vig"   aria-hidden="true"></div>
+    <div id="grain" aria-hidden="true"></div>
+    <div id="lb-top" class="letterbox" aria-hidden="true"></div>
+    <div id="lb-bot" class="letterbox" aria-hidden="true"></div>
+
+    <!-- Parallax floating stat cards -->
+    <div class="float-card" id="fc1" style="top:22%;left:5%">
+      <div class="fc-label">Pipeline Value</div>
+      <div class="fc-value fc-violet">$2.4M</div>
+      <div class="fc-sub fc-green">↑ 24% this month</div>
+    </div>
+    <div class="float-card" id="fc2" style="top:24%;right:6%">
+      <div class="fc-label">Active Leads</div>
+      <div class="fc-value">1,284</div>
+      <div class="fc-sub fc-green">↑ 38 new today</div>
+    </div>
+    <div class="float-card" id="fc3" style="bottom:22%;left:5%">
+      <div class="fc-label">Revenue YTD</div>
+      <div class="fc-value fc-green">$4.82M</div>
+      <div class="fc-sub fc-amber">Q3 target: $6M</div>
+    </div>
+    <div class="float-card" id="fc4" style="bottom:20%;right:6%">
+      <div class="fc-label">AI Queries</div>
+      <div class="fc-value fc-violet">38,491</div>
+      <div class="fc-sub">Today</div>
+    </div>
+
+    <!-- Hero text overlay -->
+    <div id="hero-layer">
+      <div class="hero-eyebrow" id="hero-eyebrow">✦ Introducing DigiDARA One</div>
+      <h1 id="hero-h1">
+        One Platform.<br/>
+        <span class="grad-word">Every Business.</span>
+      </h1>
+      <p id="hero-sub">CRM · Finance · Inventory · HRMS · Marketing · AI<br/>— all unified in one enterprise suite.</p>
+      <div class="hero-actions">
+        <a href="#cta-section" class="btn btn-primary btn-lg">Start Free Trial →</a>
+        <a href="#features-sec" class="btn btn-outline-dark btn-lg">Explore Platform</a>
+      </div>
+    </div>
+
+    <!-- Scene caption -->
+    <div id="scene-cap" aria-live="polite"></div>
+
+    <!-- Scroll cue -->
+    <div id="scroll-cue" aria-hidden="true">
+      <div class="cue-line"></div>
+      <span class="cue-text">Scroll to begin</span>
+    </div>
+
+  </div><!-- #hero-sticky -->
+</div><!-- #hero-driver -->
+
+
+<!-- ══════════════════════════════════════════════
+     LIGHT ZONE — All below-fold sections
+══════════════════════════════════════════════ -->
+<div class="light-zone">
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip" aria-label="Key platform statistics">
+    <div class="stat-cell sr">
+      <div class="stat-n grad-text" data-target="50000">50,000+</div>
+      <div class="stat-l">Businesses using DigiDARA</div>
+    </div>
+    <div class="stat-cell sr sr-delay-1">
+      <div class="stat-n grad-text">25+</div>
+      <div class="stat-l">Integrated modules</div>
+    </div>
+    <div class="stat-cell sr sr-delay-2">
+      <div class="stat-n grad-text">99.9%</div>
+      <div class="stat-l">Platform uptime SLA</div>
+    </div>
+    <div class="stat-cell sr sr-delay-3">
+      <div class="stat-n grad-text">4.9★</div>
+      <div class="stat-l">Average customer rating</div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features-sec" aria-labelledby="feat-heading">
+    <div class="container">
+      <div class="section-label">Platform</div>
+      <h2 class="section-title sr" id="feat-heading">
+        Everything you need.<br/><span class="grad-text">Nothing you don't.</span>
+      </h2>
+      <p class="section-desc sr sr-delay-1">Built natively for enterprise scale — no patchwork integrations, no per-module fees, no hidden costs.</p>
+      <div class="feat-grid">
+        <div class="feat-item sr"><div class="feat-ico">🎯</div><div class="feat-name">Smart CRM</div><div class="feat-text">AI lead scoring, pipeline management, revenue forecasting, and 360° customer profiles — all out of the box.</div></div>
+        <div class="feat-item sr sr-delay-1"><div class="feat-ico">💰</div><div class="feat-name">Finance Suite</div><div class="feat-text">Invoicing, expense tracking, multi-currency support, automated tax compliance, and real-time P&L dashboards.</div></div>
+        <div class="feat-item sr sr-delay-2"><div class="feat-ico">📦</div><div class="feat-name">Inventory Control</div><div class="feat-text">Real-time stock tracking, purchase orders, multi-warehouse management, and smart supplier portals.</div></div>
+        <div class="feat-item sr sr-delay-1"><div class="feat-ico">📣</div><div class="feat-name">Marketing Hub</div><div class="feat-text">Email, WhatsApp Business, SMS, social scheduling, A/B testing, and campaign analytics all in one place.</div></div>
+        <div class="feat-item sr sr-delay-2"><div class="feat-ico">👥</div><div class="feat-name">HRMS</div><div class="feat-text">Employee lifecycle, automated payroll, leave management, performance reviews, and recruitment pipelines.</div></div>
+        <div class="feat-item sr sr-delay-3"><div class="feat-ico">🤖</div><div class="feat-name">AI Copilot</div><div class="feat-text">A universal AI assistant trained on your live business data — ask anything, get instant, contextual insights.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRM MODULE -->
+  <section class="alt" id="crm-sec" aria-labelledby="crm-heading">
+    <div class="container">
+      <div class="mod-row">
+        <div class="sr">
+          <div class="mod-badge" style="background:#ede9fe;color:#5b5bd6;border:1px solid #ddd6fe">📊 CRM Suite</div>
+          <h2 id="crm-heading">Close more deals.<br/><span class="grad-text">Faster.</span></h2>
+          <p>An enterprise CRM that adapts to your workflow — not the other way around. AI scoring, predictive analytics, and 360° customer profiles out of the box.</p>
+          <a href="#cta-section" class="btn btn-primary">Explore CRM →</a>
+          <div class="mod-stats">
+            <div class="mod-stat"><div class="mod-stat-n grad-text">3.2×</div><div class="mod-stat-l">Increase in close rate</div></div>
+            <div class="mod-stat"><div class="mod-stat-n grad-text">68%</div><div class="mod-stat-l">Less time on admin</div></div>
+          </div>
+        </div>
+        <div class="sr sr-delay-2">
+          <div class="dash-widget" id="crm-widget">
+            <div class="dw-bar"><div class="dw-dot dw-red"></div><div class="dw-dot dw-yel"></div><div class="dw-dot dw-grn"></div><span class="dw-title">CRM — Live Pipeline</span></div>
+            <div class="dw-body">
+              <div class="dw-kpis">
+                <div class="kpi"><div class="kpi-v" style="color:#5b5bd6">$2.4M</div><div class="kpi-l">Pipeline</div></div>
+                <div class="kpi"><div class="kpi-v" style="color:#10b981">142</div><div class="kpi-l">Leads</div></div>
+                <div class="kpi"><div class="kpi-v" style="color:#f59e0b">38</div><div class="kpi-l">Hot Deals</div></div>
+                <div class="kpi"><div class="kpi-v" style="color:#7c3aed">94%</div><div class="kpi-l">Accuracy</div></div>
+              </div>
+              <div class="kanban" style="margin-top:12px">
+                <div class="k-col"><div class="k-head">Leads</div><div class="k-card"><div class="k-name">Acme Corp</div><div class="k-val">$45K</div></div><div class="k-card"><div class="k-name">TechFlow</div><div class="k-val">$22K</div></div></div>
+                <div class="k-col"><div class="k-head">Qualified</div><div class="k-card"><div class="k-name">Nexus Tech</div><div class="k-val">$120K</div></div></div>
+                <div class="k-col"><div class="k-head">Proposal</div><div class="k-card"><div class="k-name">CloudWorks</div><div class="k-val">$280K</div></div></div>
+                <div class="k-col"><div class="k-head">Won ✓</div><div class="k-card" style="border-color:#bbf7d0"><div class="k-name">GlobalBank</div><div class="k-val" style="color:#10b981">$500K</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCE MODULE -->
+  <section id="finance-sec" aria-labelledby="fin-heading">
+    <div class="container">
+      <div class="mod-row">
+        <div class="sr sr-delay-1">
+          <div class="dash-widget">
+            <div class="dw-bar"><div class="dw-dot dw-red"></div><div class="dw-dot dw-yel"></div><div class="dw-dot dw-grn"></div><span class="dw-title">Finance Dashboard</span></div>
+            <div class="dw-body">
+              <div class="dw-kpis" style="grid-template-columns:repeat(3,1fr)">
+                <div class="kpi"><div class="kpi-v" style="color:#10b981">$4.8M</div><div class="kpi-l">Revenue YTD</div></div>
+                <div class="kpi"><div class="kpi-v" style="color:#f59e0b">$320K</div><div class="kpi-l">Outstanding</div></div>
+                <div class="kpi"><div class="kpi-v" style="color:#ef4444">$88K</div><div class="kpi-l">Overdue</div></div>
+              </div>
+              <div class="dw-chart" style="margin-top:12px">
+                <svg width="100%" height="100%" viewBox="0 0 480 100" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="fg1" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#5b5bd6" stop-opacity=".35"/>
+                      <stop offset="100%" stop-color="#5b5bd6" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,85 C40,72 70,60 110,48 C150,36 170,42 210,28 C250,14 280,20 320,8 C360,-4 420,10 480,3 L480,100 L0,100Z" fill="url(#fg1)"/>
+                  <path d="M0,85 C40,72 70,60 110,48 C150,36 170,42 210,28 C250,14 280,20 320,8 C360,-4 420,10 480,3" fill="none" stroke="#5b5bd6" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sr">
+          <div class="mod-badge" style="background:#ecfdf5;color:#059669;border:1px solid #a7f3d0">💰 Finance Suite</div>
+          <h2 id="fin-heading">Your finances.<br/><span class="grad-text">Fully automated.</span></h2>
+          <p>From invoice generation to tax filing — DigiDARA Finance handles every number, so your team never has to chase a spreadsheet again.</p>
+          <a href="#cta-section" class="btn btn-primary">Explore Finance →</a>
+          <div class="mod-stats">
+            <div class="mod-stat"><div class="mod-stat-n grad-text">85%</div><div class="mod-stat-l">Fewer invoice errors</div></div>
+            <div class="mod-stat"><div class="mod-stat-n grad-text">4 hrs</div><div class="mod-stat-l">Saved per employee/week</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SUITE -->
+  <section class="alt" id="ai-sec" aria-labelledby="ai-heading">
+    <div class="container">
+      <div class="mod-row">
+        <div class="sr">
+          <div class="mod-badge" style="background:#f5f3ff;color:#5b5bd6;border:1px solid #ddd6fe">🤖 AI Copilot</div>
+          <h2 id="ai-heading">An AI that knows<br/><span class="grad-text">your business.</span></h2>
+          <p>DigiDARA AI Copilot is trained on your live CRM records, financial data, and operational metrics — giving you instant, contextual answers to any business question.</p>
+          <a href="#cta-section" class="btn btn-primary">Try AI Copilot →</a>
+        </div>
+        <div class="sr sr-delay-2">
+          <div class="chat-win">
+            <div class="chat-head">
+              <div class="chat-av" aria-hidden="true">D</div>
+              <div>
+                <div style="font-weight:700;font-size:14px;color:var(--text)">DigiDARA AI Copilot</div>
+                <div class="chat-online">● Online — Live data connected</div>
+              </div>
+            </div>
+            <div class="chat-body">
+              <div class="msg user">What's our pipeline value this month?</div>
+              <div class="msg ai">Your pipeline is currently <strong>$2.4M</strong> across 38 active deals. The top deal — CloudWorks Cloud Migration — is at Proposal stage with 72% probability. Expected close: August 15 🚀</div>
+              <div class="msg user">Draft a follow-up for Nexus Tech</div>
+              <div class="msg ai">
+                <strong>Subject:</strong> Following up on Enterprise AI Copilot<br/><br/>
+                Hi Alice, I wanted to touch base on our discussion. Based on your workflow, I believe we can cut reporting time by <strong>68%</strong>...
+              </div>
+              <div class="typing-indicator"><div class="td"></div><div class="td"></div><div class="td"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section id="integrations-sec" aria-labelledby="int-heading">
+    <div class="container" style="text-align:center">
+      <div class="section-label">Integrations</div>
+      <h2 class="section-title sr" id="int-heading">Connects with your<br/><span class="grad-text">entire stack.</span></h2>
+      <p class="section-desc sr sr-delay-1" style="margin:0 auto">300+ native integrations with the tools your team already uses — with zero configuration.</p>
+      <div class="int-grid">
+        <div class="int-badge sr"><div class="int-ico">💳</div><div class="int-name">Stripe</div></div>
+        <div class="int-badge sr sr-delay-1"><div class="int-ico">🔗</div><div class="int-name">Zapier</div></div>
+        <div class="int-badge sr sr-delay-2"><div class="int-ico">📧</div><div class="int-name">Mailchimp</div></div>
+        <div class="int-badge sr sr-delay-3"><div class="int-ico">💬</div><div class="int-name">Slack</div></div>
+        <div class="int-badge sr sr-delay-4"><div class="int-ico">📊</div><div class="int-name">Google Analytics</div></div>
+        <div class="int-badge sr"><div class="int-ico">☁️</div><div class="int-name">AWS</div></div>
+        <div class="int-badge sr sr-delay-1"><div class="int-ico">📞</div><div class="int-name">Twilio</div></div>
+        <div class="int-badge sr sr-delay-2"><div class="int-ico">📦</div><div class="int-name">Shopify</div></div>
+        <div class="int-badge sr sr-delay-3"><div class="int-ico">💼</div><div class="int-name">QuickBooks</div></div>
+        <div class="int-badge sr sr-delay-4"><div class="int-ico">📱</div><div class="int-name">WhatsApp</div></div>
+        <div class="int-badge sr"><div class="int-ico">🤖</div><div class="int-name">OpenAI</div></div>
+        <div class="int-badge sr sr-delay-1"><div class="int-ico">💵</div><div class="int-name">Razorpay</div></div>
+        <div class="int-badge sr sr-delay-2"><div class="int-ico">📅</div><div class="int-name">Google Calendar</div></div>
+        <div class="int-badge sr sr-delay-3"><div class="int-ico">🔐</div><div class="int-name">Okta</div></div>
+        <div class="int-badge sr sr-delay-4"><div class="int-ico">📹</div><div class="int-name">Zoom</div></div>
+        <div class="int-badge sr"><div class="int-ico">🗂️</div><div class="int-name">Notion</div></div>
+        <div class="int-badge sr sr-delay-1"><div class="int-ico">📬</div><div class="int-name">SendGrid</div></div>
+        <div class="int-badge sr sr-delay-2"><div class="int-ico">🔄</div><div class="int-name">HubSpot</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMER STORIES -->
+  <section class="alt" id="stories-sec" aria-labelledby="stories-heading">
+    <div class="container" style="text-align:center">
+      <div class="section-label">Customer Stories</div>
+      <h2 class="section-title sr" id="stories-heading">Trusted by teams<br/><span class="grad-text">worldwide.</span></h2>
+      <div class="testi-grid">
+        <div class="testi-card sr">
+          <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <div class="testi-q">"DigiDARA replaced five different tools for us. Our sales cycle dropped from 45 days to 18 days after deploying the CRM AI scoring. ROI was visible in the first month."</div>
+          <div class="testi-who"><div class="testi-av">AM</div><div><div class="testi-name">Arjun Mehta</div><div class="testi-role">CRO, TechVision India</div></div></div>
+        </div>
+        <div class="testi-card sr sr-delay-2">
+          <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <div class="testi-q">"The Finance module alone saved our accounts team 12 hours a week. Automated invoice reconciliation and GST filing was a game changer for our India operations."</div>
+          <div class="testi-who"><div class="testi-av">PK</div><div><div class="testi-name">Priya Krishnamurthy</div><div class="testi-role">CFO, Nexus Solutions</div></div></div>
+        </div>
+        <div class="testi-card sr sr-delay-3">
+          <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <div class="testi-q">"We manage 3,200 SKUs across 4 warehouses. DigiDARA gave us real-time visibility across all locations — something our previous ERP couldn't do even after a 2-year implementation."</div>
+          <div class="testi-who"><div class="testi-av">RS</div><div><div class="testi-name">Rohan Shah</div><div class="testi-role">COO, GlobalDistrib Ltd.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing-sec" aria-labelledby="pricing-heading">
+    <div class="container" style="text-align:center">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title sr" id="pricing-heading">Simple, transparent<br/><span class="grad-text">pricing.</span></h2>
+      <p class="section-desc sr sr-delay-1" style="margin:0 auto">Start free. Scale without surprise fees. No per-module charges — ever.</p>
+      <div class="price-grid">
+        <div class="price-card sr">
+          <div class="price-tier">Starter</div>
+          <div class="price-amt">$29<span>/mo per user</span></div>
+          <div class="price-tagline">Perfect for growing startups and small teams getting started.</div>
+          <ul class="price-ul">
+            <li>CRM — Leads, Contacts, Deals</li><li>Basic Finance & Invoicing</li>
+            <li>Email Marketing (5K/mo)</li><li>5 Active Projects</li>
+            <li>AI Copilot (100 queries/mo)</li><li>Email Support</li>
+          </ul>
+          <a href="#cta-section" class="btn btn-outline-light" style="width:100%">Get Started →</a>
+        </div>
+        <div class="price-card featured sr sr-delay-2">
+          <div class="price-tier">Professional</div>
+          <div class="price-amt">$79<span>/mo per user</span></div>
+          <div class="price-tagline">For scaling teams that need the full DigiDARA platform.</div>
+          <ul class="price-ul">
+            <li>Full CRM + AI Scoring</li><li>Complete Finance Module</li>
+            <li>Inventory Management</li><li>HRMS + Payroll</li>
+            <li>Marketing Hub (50K emails)</li><li>WhatsApp Automation</li>
+            <li>AI Copilot (1K queries/mo)</li><li>Priority Support</li>
+          </ul>
+          <a href="#cta-section" class="btn btn-primary" style="width:100%">Start Free Trial →</a>
+        </div>
+        <div class="price-card sr sr-delay-3">
+          <div class="price-tier">Enterprise</div>
+          <div class="price-amt">Custom</div>
+          <div class="price-tagline">Large organizations with custom compliance and security needs.</div>
+          <ul class="price-ul">
+            <li>Everything in Professional</li><li>Custom AI Model Training</li>
+            <li>Dedicated Infrastructure</li><li>SSO & Advanced Security</li>
+            <li>Custom Integrations & API</li><li>Unlimited AI Queries</li>
+            <li>Dedicated Account Manager</li><li>24/7 Phone Support</li>
+          </ul>
+          <a href="#contact-sec" class="btn btn-outline-light" style="width:100%">Contact Sales →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="alt" id="faq-sec" aria-labelledby="faq-heading">
+    <div class="container" style="text-align:center">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title sr" id="faq-heading">Common <span class="grad-text">questions.</span></h2>
+      <div class="faq-wrap" role="list">
+        <div class="faq-item" role="listitem"><button class="faq-btn" aria-expanded="false">Can I migrate data from my existing CRM?<span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-ans" role="region">Yes. DigiDARA includes a free migration wizard supporting Salesforce, HubSpot, Zoho, CSV, and Excel. Most migrations complete in under 2 hours with zero downtime.</div></div>
+        <div class="faq-item" role="listitem"><button class="faq-btn" aria-expanded="false">Is my data secure?<span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-ans" role="region">We are SOC 2 Type II certified, GDPR compliant, and ISO 27001 certified. All data is encrypted at rest (AES-256) and in transit (TLS 1.3). Enterprise customers get dedicated infrastructure in their preferred region.</div></div>
+        <div class="faq-item" role="listitem"><button class="faq-btn" aria-expanded="false">What is the AI Copilot trained on?<span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-ans" role="region">The AI Copilot uses retrieval-augmented generation (RAG) trained on your own business data — CRM records, financial reports, inventory logs, and HR data. Every answer is sourced from your actual data.</div></div>
+        <div class="faq-item" role="listitem"><button class="faq-btn" aria-expanded="false">How long does onboarding take?<span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-ans" role="region">Most teams are fully operational within 48 hours. Enterprise deployments typically take 2–4 weeks. A dedicated onboarding specialist is included with all Professional and Enterprise plans.</div></div>
+        <div class="faq-item" role="listitem"><button class="faq-btn" aria-expanded="false">Can I start without a credit card?<span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-ans" role="region">Yes. Start your 14-day free trial with no credit card required. You get full Professional plan access — all 25+ modules with no restrictions during the trial period.</div></div>
+        <div class="faq-item" role="listitem"><button class="faq-btn" aria-expanded="false">Does DigiDARA support multi-currency and GST/VAT?<span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-ans" role="region">Absolutely. DigiDARA Finance supports 120+ currencies, automatic exchange rate updates, GST (India), VAT (EU/UK), and regional tax compliance for 40+ countries.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact-sec" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="sr">
+          <div class="section-label">Contact</div>
+          <h2 class="section-title" id="contact-heading">Let's talk about<br/><span class="grad-text">your business.</span></h2>
+          <p class="section-desc" style="margin-bottom:36px">Whether you want a product demo, pricing details, or just have a question — we're here.</p>
+          <div class="contact-card"><div class="contact-ico">📧</div><div><div class="contact-card-title">Email Us</div><div class="contact-card-sub">hello@digidara.com</div></div></div>
+          <div class="contact-card"><div class="contact-ico">📞</div><div><div class="contact-card-title">Call Us</div><div class="contact-card-sub">+91 98765 43210 (India)</div></div></div>
+          <div class="contact-card"><div class="contact-ico">📅</div><div><div class="contact-card-title">Book a Demo</div><div class="contact-card-sub">30 min • Free • No obligation</div></div></div>
+        </div>
+        <div class="sr sr-delay-2">
+          <div class="contact-form">
+            <h3 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:24px;letter-spacing:-0.03em">Send us a message</h3>
+            <div class="form-row">
+              <div class="form-group"><label for="cf-name">Full Name</label><input id="cf-name" type="text" placeholder="Arjun Mehta" autocomplete="name"/></div>
+              <div class="form-group"><label for="cf-email">Work Email</label><input id="cf-email" type="email" placeholder="arjun@company.com" autocomplete="email"/></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label for="cf-company">Company</label><input id="cf-company" type="text" placeholder="Acme Corp"/></div>
+              <div class="form-group"><label for="cf-size">Team Size</label><select id="cf-size"><option value="">Select…</option><option>1–10</option><option>11–50</option><option>51–200</option><option>201–1000</option><option>1000+</option></select></div>
+            </div>
+            <div class="form-group"><label for="cf-interest">Interest</label><select id="cf-interest"><option value="">What are you interested in?</option><option>CRM</option><option>Finance</option><option>Full Platform Demo</option><option>Enterprise Pricing</option><option>Partnership</option></select></div>
+            <div class="form-group"><label for="cf-msg">Message</label><textarea id="cf-msg" placeholder="Tell us about your business and what you're looking for…"></textarea></div>
+            <button type="button" onclick="alert('Thank you! Our team will reach out within 24 hours.')" class="btn btn-primary" style="width:100%;padding:14px">Send Message →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- .light-zone -->
+
+<!-- CTA (dark) -->
+<section id="cta-section" aria-labelledby="cta-heading">
+  <div class="cta-aurora" aria-hidden="true"></div>
+  <div class="container" style="position:relative;z-index:1;text-align:center">
+    <div class="hero-eyebrow" style="margin-bottom:30px">Get Started Today</div>
+    <div class="cta-title sr" id="cta-heading">
+      One Platform.<br/><span class="grad-word">Every Business.</span><br/>Powered by AI.
+    </div>
+    <div class="cta-sub sr sr-delay-1">Join 50,000+ businesses running smarter with DigiDARA One.</div>
+    <div class="cta-btns sr sr-delay-2">
+      <a href="#" class="btn btn-primary btn-xl">Start Free Trial — No card required</a>
+      <a href="#contact-sec" class="btn btn-outline-dark btn-xl">Schedule a Demo</a>
+    </div>
+    <div class="cta-note sr sr-delay-3">14-day free trial · All features included · Cancel anytime</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo" style="margin-bottom:0">
+          <div class="logo-mark">D</div>
+          <span class="logo-text" style="color:#fff">DigiDARA <span class="one">One</span></span>
+        </div>
+        <p>One Platform. Every Business. Powered by AI. The enterprise SaaS suite for growing companies worldwide.</p>
+        <div class="socials" aria-label="Social media links">
+          <a href="#" class="soc" aria-label="Twitter / X">𝕏</a>
+          <a href="#" class="soc" aria-label="LinkedIn">in</a>
+          <a href="#" class="soc" aria-label="GitHub">⌥</a>
+          <a href="#" class="soc" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Platform</h4><a href="#">CRM Suite</a><a href="#">Finance</a><a href="#">Inventory</a><a href="#">HRMS</a><a href="#">Marketing</a><a href="#">AI Copilot</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Partners</a><a href="#contact-sec">Contact</a></div>
+      <div class="foot-col"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Security</a><a href="#">Cookie Policy</a><a href="#">GDPR</a><a href="#">Status</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 DigiDARA Technologies Pvt. Ltd. All rights reserved.</span>
+      <span>Made with ❤️ for enterprise teams worldwide</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════
+     JAVASCRIPT ENGINE
+══════════════════════════════════════════════ -->
+<script>
+'use strict';
+// ─────────────────────────────────────────────
+// LENIS + GSAP SETUP
+// ─────────────────────────────────────────────
+const lenis = new Lenis({
+  duration: 1.15,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
+  smoothTouch: false,
+});
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.ticker.add(t => lenis.raf(t * 1000));
+gsap.ticker.lagSmoothing(0);
+lenis.on('scroll', ScrollTrigger.update);
+
+// ─────────────────────────────────────────────
+// CANVAS + PARTICLE ENGINE
+// ─────────────────────────────────────────────
+const film   = document.getElementById('film');
+const ctx    = film.getContext('2d');
+let W = 0, H = 0;
+
+// ─ Scene definitions ─
+const SCENES = [
+  'Digital cosmos awakening…',
+  'DigiDARA logo forming…',
+  'Enterprise dashboard coming to life…',
+  'CRM — customer data flowing…',
+  'Finance analytics rising…',
+  'Inventory tracking activated…',
+  'Marketing automation engaged…',
+  'HRMS workflows connected…',
+  'AI Copilot online…',
+  'One unified ecosystem.',
+];
+
+// ─ Particle definition ─
+const NPART = 320;
+const pts   = [];
+
+function rnd(a, b) { return a + Math.random() * (b - a); }
+
+class P {
+  constructor() {
+    this.x  = 0; this.y = 0;
+    this.tx = 0; this.ty = 0;
+    this.r  = rnd(0.7, 2.8);
+    this.life = rnd(0, Math.PI * 2);
+    this.vx = rnd(-0.25, 0.25);
+    this.vy = rnd(-0.25, 0.25);
+    this.hue = rnd(220, 285);
+    this.alpha = rnd(0.4, 1);
+    this.spd = rnd(0.04, 0.09);
+  }
+  scatter() { this.tx = rnd(W * 0.05, W * 0.95); this.ty = rnd(H * 0.05, H * 0.95); }
+  moveTo(nx, ny) { this.tx = nx; this.ty = ny; }
+  tick(prog) {
+    this.x += (this.tx - this.x) * this.spd;
+    this.y += (this.ty - this.y) * this.spd;
+    this.x += this.vx * (1 - prog * 0.6);
+    this.y += this.vy * (1 - prog * 0.6);
+    this.life += 0.025;
+    this.alpha = 0.38 + 0.62 * Math.abs(Math.sin(this.life));
+    this.hue   = 220 + prog * 70 + Math.sin(this.life * 0.5) * 10;
+    if (this.x < 0) this.x = W; if (this.x > W) this.x = 0;
+    if (this.y < 0) this.y = H; if (this.y > H) this.y = 0;
+  }
+}
+for (let i = 0; i < NPART; i++) pts.push(new P());
+
+// ─ Target shape builders ─
+function tScatter()  { return pts.map(() => ({ x: rnd(W*.05, W*.95), y: rnd(H*.05, H*.95) })); }
+
+function tLogo() {
+  const cx = W/2, cy = H/2, R = Math.min(W,H) * 0.23, res = [];
+  const vN = Math.floor(NPART * 0.3);
+  for (let i = 0; i < vN; i++) res.push({ x: cx - R*.44, y: cy - R*.8 + (i/vN)*R*1.6 });
+  const aN = NPART - vN;
+  for (let i = 0; i < aN; i++) {
+    const a = -Math.PI/2 + (i/aN)*Math.PI;
+    res.push({ x: cx - R*.44 + R*Math.cos(a), y: cy + R*Math.sin(a) });
+  }
+  return res;
+}
+
+function tGrid() {
+  const cx=W/2, cy=H/2, cols=14, rows=9, gx=Math.min(W*.55/cols,34), gy=Math.min(H*.42/rows,26), res=[];
+  for (let r=0; r<rows && res.length<NPART; r++)
+    for (let c=0; c<cols && res.length<NPART; c++)
+      res.push({ x:cx-(cols/2)*gx+c*gx+rnd(-5,5), y:cy-(rows/2)*gy+r*gy+rnd(-4,4) });
+  while (res.length < NPART) res.push({ x:cx, y:cy });
+  return res;
+}
+
+function tOrbit() {
+  const cx=W/2, cy=H/2, res=[];
+  const radii = [0.07,0.13,0.19,0.26].map(f => Math.min(W,H)*f);
+  const perR = Math.floor(NPART / radii.length);
+  radii.forEach((R, ri) => {
+    for (let i=0; i<perR; i++) {
+      const a = (i/perR)*Math.PI*2 + ri * 0.5;
+      res.push({ x:cx+R*Math.cos(a), y:cy+R*Math.sin(a) });
+    }
+  });
+  while (res.length < NPART) res.push({ x:cx, y:cy });
+  return res;
+}
+
+function tCollapse() { return pts.map(() => ({ x:W/2+rnd(-15,15), y:H/2+rnd(-15,15) })); }
+
+// ─ Frame cache ─
+const TOTAL_FRAMES = 300;
+const cache = new Array(TOTAL_FRAMES).fill(null);
+let cacheReady = false;
+
+function targetsForProg(p) {
+  if (p < 0.06)  return tScatter();
+  if (p < 0.22)  return tLogo();
+  if (p < 0.42)  return tGrid();
+  if (p < 0.78)  return tOrbit();
+  if (p < 0.93)  return tCollapse();
+  return tLogo();
+}
+
+// Build cache async
+function buildCache() {
+  // Reset particles
+  const init = tScatter();
+  pts.forEach((p, i) => { p.x = init[i].x; p.y = init[i].y; p.tx = p.x; p.ty = p.y; });
+
+  let fi = 0;
+  let currentTargets = tScatter();
+
+  function next() {
+    if (fi >= TOTAL_FRAMES) { cacheReady = true; return; }
+    const prog = fi / TOTAL_FRAMES;
+
+    // Update targets every 6 frames for smooth interpolation
+    if (fi % 6 === 0) { currentTargets = targetsForProg(prog); }
+    pts.forEach((p, i) => { p.tx = currentTargets[i].x; p.ty = currentTargets[i].y; p.tick(prog); });
+
+    drawScene(prog);
+    cache[fi] = ctx.getImageData(0, 0, W, H);
+    fi++;
+    if (fi % 4 === 0) requestAnimationFrame(next);
+    else next();
+  }
+  next();
+}
+
+// ─ Render a scene to canvas ─
+function drawScene(prog) {
+  ctx.clearRect(0, 0, W, H);
+
+  // Background
+  const si = Math.min(Math.floor(prog * 10), 9);
+  // Dark → darker with hue shift
+  const bg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W,H) * 0.88);
+  const c1 = `hsl(${230 + prog*30},${40 - prog*10}%,${8 + prog*3}%)`;
+  const c2 = `hsl(${220 + prog*20},${50}%,${4}%)`;
+  bg.addColorStop(0, c1); bg.addColorStop(1, c2);
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+
+  // Connection lines (skip for performance: only check j < i+10)
+  const maxDist = 65 + prog * 25;
+  ctx.lineWidth = 0.45;
+  for (let i = 0; i < pts.length; i++) {
+    for (let j = i+1; j < pts.length && j < i+10; j++) {
+      const dx = pts[i].x-pts[j].x, dy = pts[i].y-pts[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < maxDist) {
+        const a = (1-d/maxDist) * 0.2;
+        ctx.strokeStyle = `hsla(${pts[i].hue},80%,68%,${a})`;
+        ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
+      }
+    }
+  }
+
+  // Orb effects
+  function drawOrb(cx, cy, r, alpha, h1=240, h2=280) {
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    g.addColorStop(0, `hsla(${h1},90%,65%,${alpha})`);
+    g.addColorStop(0.4, `hsla(${h2},80%,55%,${alpha*0.45})`);
+    g.addColorStop(1, `hsla(${h1},70%,50%,0)`);
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.fillStyle = g; ctx.fill();
+  }
+
+  // Scene-specific orbs
+  if (prog > 0.08 && prog < 0.28) {
+    const t = (prog-0.08)/0.20;
+    drawOrb(W/2, H/2, Math.min(W,H)*0.18*t, 0.55*t);
+  }
+  if (prog > 0.88) {
+    const t = (prog-0.88)/0.12;
+    drawOrb(W/2, H/2, Math.min(W,H)*0.30*t, 0.7*t, 260, 310);
+  }
+
+  // Particles — glow + core
+  pts.forEach(p => {
+    const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*5);
+    glow.addColorStop(0, `hsla(${p.hue},85%,68%,${p.alpha*0.28})`);
+    glow.addColorStop(1, `hsla(${p.hue},85%,68%,0)`);
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r*5, 0, Math.PI*2);
+    ctx.fillStyle = glow; ctx.fill();
+
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fillStyle = `hsla(${p.hue},90%,72%,${p.alpha})`;
+    ctx.fill();
+  });
+
+  // Scan line every other "real" frame
+  if (Math.floor(prog*300) % 2 === 0) {
+    for (let y = 0; y < H; y += 5) {
+      ctx.fillStyle = 'rgba(0,0,0,0.025)'; ctx.fillRect(0, y, W, 1);
+    }
+  }
+}
+
+// ─ Live fallback render when cache not ready ─
+let liveProg = 0;
+function liveRender(prog) {
+  if (Math.abs(prog - liveProg) < 0.002) return;
+  liveProg = prog;
+  const tgt = targetsForProg(prog);
+  pts.forEach((p, i) => { p.tx = tgt[i].x; p.ty = tgt[i].y; p.tick(prog); });
+  drawScene(prog);
+}
+
+// ─ Canvas resize ─
+function resize() {
+  W = film.width  = window.innerWidth;
+  H = film.height = window.innerHeight;
+  pts.forEach(p => p.scatter());
+  cacheReady = false;
+  buildCache();
+}
+
+// ─────────────────────────────────────────────
+// SCROLL ENGINE
+// ─────────────────────────────────────────────
+const heroDriver = document.getElementById('hero-driver');
+const sceneCap   = document.getElementById('scene-cap');
+const scrollCue  = document.getElementById('scroll-cue');
+const heroLayer  = document.getElementById('hero-layer');
+const lbTop      = document.getElementById('lb-top');
+const lbBot      = document.getElementById('lb-bot');
+const progBar    = document.getElementById('scroll-progress');
+const nav        = document.getElementById('nav');
+const fc1=document.getElementById('fc1'), fc2=document.getElementById('fc2');
+const fc3=document.getElementById('fc3'), fc4=document.getElementById('fc4');
+
+let lastFI = -1;
+
+function getHeroProg() {
+  const r = heroDriver.getBoundingClientRect();
+  const total = heroDriver.offsetHeight - window.innerHeight;
+  return Math.max(0, Math.min(1, -r.top / total));
+}
+
+function tick() {
+  const prog = getHeroProg();
+
+  // Update film
+  if (cacheReady) {
+    const fi = Math.min(Math.floor(prog * (TOTAL_FRAMES-1)), TOTAL_FRAMES-1);
+    if (fi !== lastFI && cache[fi]) {
+      ctx.putImageData(cache[fi], 0, 0);
+      lastFI = fi;
+    }
+  } else {
+    liveRender(prog);
+  }
+
+  // Letterbox
+  const lbH = prog > 0.1 ? Math.min(72, (prog-0.1) * 320) : 0;
+  lbTop.style.height = lbH + 'px';
+  lbBot.style.height = lbH + 'px';
+
+  // Hero text fade
+  const heroAlpha = prog < 0.08 ? 1 : Math.max(0, 1 - (prog-0.08)/0.12);
+  heroLayer.style.opacity  = heroAlpha;
+  heroLayer.style.transform = `translate(-50%,-50%) translateY(${(1-heroAlpha)*-35}px)`;
+
+  // Scroll cue fade
+  scrollCue.style.opacity = Math.max(0, 1 - prog/0.06);
+
+  // Scene caption
+  if (prog > 0.04 && prog < 0.97) {
+    const si = Math.min(Math.floor(prog * SCENES.length), SCENES.length-1);
+    sceneCap.textContent = SCENES[si];
+    sceneCap.style.opacity = '1';
+  } else {
+    sceneCap.style.opacity = '0';
+  }
+
+  // Parallax cards — appear in middle of scroll
+  function cardOp(start, end) { return prog<start?0:prog>end?0:Math.min(1,(prog-start)/0.06,1-(prog-end+0.06)/0.06); }
+  const drift = prog * 100;
+  fc1.style.opacity = cardOp(0.18, 0.82); fc1.style.transform = `translate(${-drift*.5}px,${drift*.35}px)`;
+  fc2.style.opacity = cardOp(0.22, 0.86); fc2.style.transform = `translate(${drift*.6}px,${-drift*.4}px)`;
+  fc3.style.opacity = cardOp(0.38, 0.82); fc3.style.transform = `translate(${-drift*.4}px,${-drift*.4}px)`;
+  fc4.style.opacity = cardOp(0.32, 0.88); fc4.style.transform = `translate(${drift*.5}px,${drift*.5}px)`;
+
+  requestAnimationFrame(tick);
+}
+
+// Global scroll progress bar
+lenis.on('scroll', ({ progress }) => {
+  gsap.set('#scroll-progress', { scaleX: progress, transformOrigin: 'left' });
+});
+
+// Nav color scheme
+ScrollTrigger.create({
+  trigger: '.light-zone',
+  start: 'top 68px',
+  onEnter:      () => { nav.classList.remove('dark-nav'); nav.classList.add('light-nav'); document.getElementById('nav-signin').className='btn btn-outline-light'; },
+  onLeaveBack:  () => { nav.classList.remove('light-nav'); nav.classList.add('dark-nav'); document.getElementById('nav-signin').className='btn btn-outline-dark'; },
+});
+
+// ─────────────────────────────────────────────
+// GSAP SECTION ANIMATIONS
+// ─────────────────────────────────────────────
+// Hero entrance
+gsap.from(['#hero-eyebrow', '#hero-h1', '#hero-sub', '.hero-actions'], {
+  opacity: 0, y: 28, duration: 1, stagger: 0.14, ease: 'power3.out', delay: 0.5,
+});
+
+// Feature cards
+gsap.from('.feat-item', {
+  opacity: 0, y: 40, duration: 0.7, stagger: { amount: 0.7 }, ease: 'power3.out',
+  scrollTrigger: { trigger: '#features-sec', start: 'top 72%' },
+});
+
+// Module rows slide in
+document.querySelectorAll('.mod-row').forEach(row => {
+  const kids = Array.from(row.children);
+  gsap.from(kids, {
+    opacity: 0, x: (i) => i % 2 === 0 ? -50 : 50,
+    duration: 1, stagger: 0.12, ease: 'power3.out',
+    scrollTrigger: { trigger: row, start: 'top 72%' },
+  });
+});
+
+// Dashboard widget 3D tilt
+document.querySelectorAll('.dash-widget').forEach(w => {
+  const parent = w.closest('.mod-row') || w.parentElement;
+  parent.addEventListener('mousemove', e => {
+    const r = w.getBoundingClientRect();
+    const dx = (e.clientX - r.left - r.width/2) / r.width;
+    const dy = (e.clientY - r.top - r.height/2) / r.height;
+    w.style.transform = `perspective(900px) rotateY(${dx*7}deg) rotateX(${-dy*5}deg) translateZ(16px)`;
+    w.style.transition = 'transform 0.08s linear';
+  });
+  parent.addEventListener('mouseleave', () => {
+    w.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) translateZ(0)';
+    w.style.transition = 'transform 0.6s ease';
+  });
+});
+
+// Integration badges stagger
+gsap.from('.int-badge', {
+  opacity: 0, scale: 0.88, duration: 0.55, stagger: { amount: 0.8, from: 'start' }, ease: 'back.out(1.5)',
+  scrollTrigger: { trigger: '#integrations-sec', start: 'top 68%' },
+});
+
+// Pricing cards
+gsap.from('.price-card', {
+  opacity: 0, y: 50, scale: 0.96, duration: 0.7, stagger: 0.15, ease: 'back.out(1.2)',
+  scrollTrigger: { trigger: '#pricing-sec', start: 'top 65%' },
+});
+
+// Testimonials
+gsap.from('.testi-card', {
+  opacity: 0, y: 40, duration: 0.7, stagger: 0.15, ease: 'power2.out',
+  scrollTrigger: { trigger: '#stories-sec', start: 'top 70%' },
+});
+
+// CTA big title
+gsap.from('.cta-title', {
+  opacity: 0, y: 60, scale: 0.97, duration: 1.2, ease: 'power4.out',
+  scrollTrigger: { trigger: '#cta-section', start: 'top 65%' },
+});
+
+// ─────────────────────────────────────────────
+// SCROLL REVEAL — IntersectionObserver
+// ─────────────────────────────────────────────
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.sr').forEach(el => revObs.observe(el));
+
+// ─────────────────────────────────────────────
+// FAQ ACCORDION
+// ─────────────────────────────────────────────
+document.querySelectorAll('.faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-btn').setAttribute('aria-expanded','false'); });
+    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  });
+});
+
+// ─────────────────────────────────────────────
+// SMOOTH ANCHOR SCROLL
+// ─────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -68, duration: 1.4 }); }
+  });
+});
+
+// ─────────────────────────────────────────────
+// NAV LINK ACTIVE STATE (highlight on scroll)
+// ─────────────────────────────────────────────
+const sectionIds = ['#features-sec','#crm-sec','#pricing-sec','#stories-sec','#contact-sec'];
+sectionIds.forEach(id => {
+  const el = document.querySelector(id);
+  if (!el) return;
+  ScrollTrigger.create({
+    trigger: el, start: 'top 55%', end: 'bottom 55%',
+    onToggle: self => {
+      const link = document.querySelector(`.nav-links a[href="${id}"]`);
+      if (link) link.style.fontWeight = self.isActive ? '700' : '500';
+    },
+  });
+});
+
+// ─────────────────────────────────────────────
+// KEYBOARD ACCESSIBILITY
+// ─────────────────────────────────────────────
+window.addEventListener('keydown', e => {
+  if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA' || document.activeElement.tagName === 'SELECT') return;
+  if (e.key === 'ArrowDown' || e.key === 'PageDown') lenis.scrollTo(window.scrollY + window.innerHeight * 0.45, { duration: 0.9 });
+  if (e.key === 'ArrowUp'   || e.key === 'PageUp')   lenis.scrollTo(window.scrollY - window.innerHeight * 0.45, { duration: 0.9 });
+});
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+window.addEventListener('resize', () => { clearTimeout(window._rsz); window._rsz = setTimeout(resize, 200); });
+resize();
+tick();
+
+// Start nav in dark mode
+nav.classList.add('dark-nav');
+</script>
+</body>
+</html>
