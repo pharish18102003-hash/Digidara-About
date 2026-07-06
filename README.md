@@ -240,11 +240,11 @@ git push origin feature-name
 
 **Full Stack Developer | React Developer | Python & Flask Developer**
 
-📧 Email: your-email@example.com
+📧 Email: pharish18102003@gmail.com
 
 🔗 GitHub: https://github.com/pharish18102003-hash
 
-💼 LinkedIn: https://linkedin.com/in/your-profile
+💼 LinkedIn: www.linkedin.com/in/harishpalanisamy
 
 I enjoy building modern, scalable, and user-friendly web applications using React, Flask, Python, JavaScript, HTML, CSS, and SQL. I am passionate about learning new technologies and creating high-quality software solutions.
 
